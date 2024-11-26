@@ -1,0 +1,135 @@
+.btn {
+  height: fit-content;
+  border-radius: 0.5remF;
+  padding: 0.7rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  color: #f9f9f9;
+  font-size: 0.8rem;
+  transition: 0.3s;
+  font-weight: 400;
+}
+
+.btn-submit {
+  color: #fff;
+  background-color: #006aae;
+  border-color: #006aae;
+}
+
+.btn-submit:hover {
+  color: #fff;
+  background-color: #005a94;
+  border-color: #4458b8;
+}
+
+.btn-submit:focus {
+  color: #fff;
+  background-color: #005a94;
+  border-color: #4458b8;
+  -webkit-box-shadow: 0 0 0 0.15rem rgba(111, 132, 234, 0.5);
+  box-shadow: 0 0 0 0.15rem rgba(111, 132, 234, 0.5);
+}
+
+.btn-submit.disabled {
+  color: #fff;
+  background-color: #556ee6;
+  border-color: #556ee6;
+}
+
+.btn-update {
+  color: #fff;
+  background-color: #28a745; /* Green theme for update */
+  border-color: #28a745;
+}
+
+.btn-update:hover {
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-update:focus {
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
+  -webkit-box-shadow: 0 0 0 0.15rem rgba(40, 167, 69, 0.5);
+  box-shadow: 0 0 0 0.15rem rgba(40, 167, 69, 0.5);
+}
+
+.btn-update.disabled {
+  color: #fff;
+  background-color: #82c785;
+  border-color: #82c785;
+}
+
+.btn-reset {
+  border: 1px solid #7f7f7f;
+  color: #7f7f7f;
+  background-color: transparent;
+}
+
+.btn-reset:hover {
+  color: #fff;
+  background-color: #f46a6a;
+  border-color: #f46a6a;
+}
+
+.btn-reset:focus {
+  color: #fff;
+  background-color: #cf5a5a;
+  border-color: #c35555;
+  -webkit-box-shadow: 0 0 0 0.15rem rgba(246, 128, 128, 0.5);
+  box-shadow: 0 0 0 0.15rem rgba(246, 128, 128, 0.5);
+}
+
+.btn-reset.disabled {
+  color: #fff;
+  background-color: #f46a6a;
+  border-color: #f46a6a;
+}
+
+.btn-status {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.btn-status:hover img {
+  filter: brightness(0) invert(1);
+}
+
+.btn-edit {
+  background-color: #198fd91a;
+}
+
+.btn-edit:hover {
+  background-color: #198fd9;
+}
+
+.btn-delete {
+  background-color: #f9444a1a;
+}
+
+.btn-delete:hover {
+  background-color: #f9444a;
+}
+
+.btn-status img {
+  width: 13px;
+}
+
+@media (max-width: 768px) {
+  .btn-status {
+    width: 20px;
+    height: 20px;
+  }
+  .btn-status img {
+    width: 8px;
+  }
+}

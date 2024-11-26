@@ -1,0 +1,110 @@
+form input {
+  width: 100%;
+  border: 1px solid #0000001c;
+  border-radius: 5px;
+  padding: 0.47rem 0.75rem;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  transition: 0.3s;
+  color: #666;
+  height: 40px;
+}
+
+form textarea {
+  width: 100%;
+  border: 1px solid #0000001c;
+  border-radius: 5px;
+  padding: 0.47rem 0.75rem;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  transition: 0.3s;
+  color: #666;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border: 1px solid #f3f2ee;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.6);
+  outline: none;
+}
+
+form input::placeholder,
+form textarea::placeholder {
+  color: #7f7f7f94;
+}
+
+form .form-check-input[type="checkbox"] {
+  border-radius: 0.25em;
+  width: 15px;
+  height: 15px;
+  padding: 3px;
+  margin-bottom: 0;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+form label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+form label span {
+  color: red;
+}
+
+.react-select {
+  height: 40px;
+}
+
+.react-select .css-13cymwt-control {
+  border-color: #e7e7e7;
+  height: 40px;
+}
+
+.react-select .css-hlgwow {
+  height: 40px;
+}
+
+.react-select .css-19bb58m {
+  height: 30px;
+}
+
+.react-select .css-19bb58m input {
+  height: 27px;
+  box-shadow: none !important;
+}
+
+.react-select .css-1cfo1cf input {
+  height: 27px;
+  box-shadow: none !important;
+}
+.react-select .css-1cfo1cf input:focus {
+  box-shadow: none !important;
+}
+
+.react-select .css-1dyz3mf {
+  height: 40px;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+}
+
+.radio-group label input {
+  margin: 0 5px 0 0;
+  box-shadow: none;
+  border: 2px solid #c1c1c1;
+  height: 18px;
+  width: 18px;
+}

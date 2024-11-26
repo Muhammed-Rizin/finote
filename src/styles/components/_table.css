@@ -1,0 +1,61 @@
+.table-list {
+  margin-top: 1rem;
+  border-collapse: collapse;
+  width: 100%;
+
+  overflow: hidden;
+  min-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-list td,
+.table-list th {
+  border: 1px solid #eeeeee;
+  text-align: left;
+  padding: 10px;
+}
+
+.table-list thead {
+  background-color: #00aabc1a;
+}
+
+.table-list thead th {
+  border: none;
+  font-size: 1rem;
+  color: #535353;
+  text-align: center;
+  vertical-align: middle;
+  text-wrap: nowrap;
+}
+
+.table-list tbody td {
+  color: #343747;
+  font-size: 0.8rem;
+  text-align: start;
+  vertical-align: middle;
+  padding: 0.5rem;
+}
+
+.table-list tbody .date-field {
+  text-wrap: nowrap;
+  text-align: center;
+}
+
+.table-list tbody .actions div {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .table-list th,
+  .table-list td {
+    font-size: 0.7rem;
+    padding: 5px;
+  }
+
+  .table-list {
+    font-size: 0.8125rem;
+  }
+}

@@ -1,0 +1,40 @@
+.login-card {
+  width: 400px;
+  background-color: var(--card-background);
+  border: none;
+}
+
+.login-title {
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.login-input {
+  background-color: var(--input-background);
+  border: 1px solid var(--input-border);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.login-button {
+  background-color: var(--primary-button-color);
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: var(--primary-button-hover);
+}
+
+.login-footer {
+  color: var(--secondary-text-color);
+  font-size: 0.9rem;
+}
+
+.login-footer a {
+  color: var(--text-color);
+  font-weight: bold;
+}

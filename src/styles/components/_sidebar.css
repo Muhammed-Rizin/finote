@@ -1,0 +1,108 @@
+.sidebar {
+  width: 250px !important;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  padding: 10px 0;
+  transition: width 0.3s ease;
+  z-index: 5;
+}
+
+.sidebar.collapsed {
+  width: 70px !important;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.5rem;
+  color: #333;
+  margin-left: auto;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.menu-item {
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #333;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+  border-left: 3px solid transparent;
+}
+
+.menu-item .menu-icon svg {
+  margin-right: 10px;
+  width: 24px;
+  height: 24px;
+}
+
+.menu-item:hover,
+.menu-item.active {
+  background-color: #f3f2ee;
+  color: #000;
+}
+
+.menu-item.active {
+  font-weight: bold;
+  border-left: 3px solid #000;
+}
+
+.sidebar.collapsed .menu-item .menu-icon {
+  margin: 0 auto;
+}
+
+.sidebar.collapsed .menu-item span {
+  display: none;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.menu::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 170px !important;
+    overflow-x: hidden;
+  }
+
+  .sidebar.collapsed {
+    width: 50px !important;
+  }
+
+  .menu-item {
+    padding: 8px 0;
+  }
+
+  .menu-item .menu-icon {
+    margin: auto 8px;
+  }
+
+  .menu-item .menu-icon svg {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+  }
+}

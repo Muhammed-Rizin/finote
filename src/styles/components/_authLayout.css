@@ -1,0 +1,87 @@
+.auth-layout {
+  display: flex;
+  height: 100vh;
+  width: 100% !important;
+  flex-direction: row;
+}
+
+.header {
+  background-color: #ffffff;
+  padding: 15px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.header-right {
+  float: right;
+  display: flex;
+  align-items: center;
+}
+
+.auth-layout {
+  display: flex;
+  height: 100vh;
+  flex-direction: row;
+}
+
+.sidebar {
+  transition: width 0.3s ease;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 250px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
+  transition: margin-left 0.3s ease;
+  width: calc(100% - 250px);
+  overflow: hidden;
+}
+
+.auth-layout.collapsed .main-content {
+  margin-left: 70px;
+  width: calc(100% - 70px);
+}
+
+.content {
+  padding: 20px;
+  background-color: #f3f2ee;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.content .page-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 0;
+  color: #2a2a2a;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .auth-layout .main-content {
+    margin-left: 70px;
+    width: calc(100% - 170px);
+  }
+
+  .auth-layout.collapsed .main-content {
+    margin-left: 50px;
+    width: calc(100% - 70px);
+  }
+
+  .content {
+    margin-top: 0px;
+    padding: 20px 10px;
+  }
+}
