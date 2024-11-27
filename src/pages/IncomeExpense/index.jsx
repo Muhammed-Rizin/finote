@@ -20,21 +20,27 @@ const IncomeExpense = () => {
   const typeValues = { INCOME: 1, EXPENSE: 2 };
   const initialState = { type: typeValues.INCOME, date, time };
 
-  const [categoryOptions, setCategoryOptions] = useState([]);
   const [tableData, setTableData] = useState([]);
 
   const [masterObject, setMasterObject] = useState({ ...initialState });
   const [selectedFields, setSelectedFields] = useState({});
 
+  const [categoryOptions, setCategoryOptions] = useState([]);
+  const [accountsOptions, setAccountsOptions] = useState([]);
+
   useEffect(() => {
-    handleTableData();
-    handleCategoryOptions();
+    handleOptions(`category/options`, setCategoryOptions);
+    handleOptions(`accounts/options`, setAccountsOptions);
   }, []); // eslint-disable-line
 
-  const handleCategoryOptions = async () => {
+  useEffect(() => {
+    handleTableData();
+  }, []); // eslint-disable-line
+
+  const handleOptions = async (url, setState) => {
     try {
-      const response = await get(`category/options`);
-      setCategoryOptions(response.data);
+      const response = await get(url);
+      setState(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -54,7 +60,7 @@ const IncomeExpense = () => {
     try {
       e.preventDefault();
 
-      if (!masterObject.amount || !masterObject.category) return;
+      if (!masterObject.amount || !masterObject.category || !masterObject.account) return;
 
       const method = masterObject.id ? patch : post;
       const response = await method(`income-expense`, masterObject);
@@ -147,6 +153,16 @@ const IncomeExpense = () => {
                 />
               </div>
               <div className="col-md-3">
+                <label>Account</label>
+                <Select
+                  value={selectedFields?.account || ""}
+                  onChange={(selected) => handleSelectChange({ selected, name: "account" })}
+                  options={accountsOptions}
+                  className="react-select"
+                  isMulti
+                />
+              </div>
+              <div className="col-md-3">
                 <label>Category</label>
                 <Select
                   value={selectedFields?.category || ""}
@@ -166,7 +182,7 @@ const IncomeExpense = () => {
                   onChange={(e) => handleValueChange(e.target)}
                 />
               </div>
-              <div className="col-md-3 d-flex gap-2">
+              <div className="col-md-3 d-flex gap-2 form-button">
                 <button class="btn btn-submit">Submit</button>
                 <button class="btn btn-reset" type="reset" onClick={reset}>
                   Reset
