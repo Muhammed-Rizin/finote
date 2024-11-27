@@ -12,4 +12,6 @@ router.post("/", controller.create);
 router.patch("/", controller.update);
 router.delete("/", controller.del);
 
+router.get("/options", controller.options);
+
 export default router;

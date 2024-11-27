@@ -8,9 +8,10 @@ const auth = asyncErrorHandler(async (req, res, next) => {
     if (!token) throw new Error("Access Denied: No token provided", 403);
 
     const tokenData = jwt.verify(token, ACCESS_TOKEN.SECRET);
-    const user = await models.User.findById(tokenData.id).select("-password");
+    const user = await models.User.findById(tokenData.id).select("-password").lean();
 
     req.user = user;
+    req.id = user._id;
 
     next();
   } catch (error) {

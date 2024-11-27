@@ -7,6 +7,7 @@ const schema = new Schema(
     name: String,
     amount: { type: Number, default: 0 },
     category: [{ type: Schema.Types.ObjectId, ref: COLLECTIONS.CATEGORY }],
+    user: { type: Schema.Types.ObjectId, ref: COLLECTIONS.USERS },
 
     remarks: String,
     uniqueId: String,

@@ -6,6 +6,7 @@ const schema = new Schema(
   {
     name: String,
     balance: { type: Number, default: 0 },
+    user: { type: Schema.Types.ObjectId, ref: COLLECTIONS.USERS },
 
     ip: { type: String },
     uniqueId: { type: String },

@@ -5,6 +5,7 @@ import { getDate, getTime } from "../helper/functions.js";
 const schema = new Schema(
   {
     name: String,
+    user: { type: Schema.Types.ObjectId, ref: COLLECTIONS.USERS },
 
     ip: { type: String },
     uniqueId: { type: String },

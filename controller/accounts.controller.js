@@ -3,7 +3,7 @@ import Counter from "../helper/counter.js";
 import { getDate, getTime, paginationValues } from "../helper/functions.js";
 
 export const list = asyncErrorHandler(async (req) => {
-  const condition = { status: 0 };
+  const condition = { status: 0, user: req.id };
 
   const { skip, limit } = paginationValues(req.query);
 
@@ -23,6 +23,7 @@ export const create = asyncErrorHandler(async (req) => {
   if (isNull(name)) throw new Error("The field 'Name' is required", 400);
 
   const exists = await models.Accounts.findOne({
+    user: req.id,
     status: 0,
     name: { $regex: name, $options: "i" },
   });
@@ -31,7 +32,7 @@ export const create = asyncErrorHandler(async (req) => {
   const counter = new Counter("category");
   const uniqueId = await counter.uniqueId("CT");
 
-  await models.Accounts({ name, balance, uniqueId }).save();
+  await models.Accounts({ name, user: req.id, balance, uniqueId }).save();
   counter.save();
 
   return new Response("Account created successfully", null, 200);
@@ -45,6 +46,7 @@ export const update = asyncErrorHandler(async (req) => {
   if (isNull(name)) throw new Error("The field 'Name' is required", 400);
 
   const exists = await models.Accounts.findOne({
+    user: req.id,
     status: 0,
     _id: { $ne: id },
     name: { $regex: name, $options: "i" },
@@ -52,7 +54,7 @@ export const update = asyncErrorHandler(async (req) => {
   if (exists) throw new Error(`Account with name '${name}' already exists`, 400);
 
   const data = await models.Accounts.findOneAndUpdate(
-    { _id: id, status: 0 },
+    { _id: id, user: req.id, status: 0 },
     { name, balance, upDate: getDate(), upTime: getTime() }
   );
 
@@ -65,8 +67,19 @@ export const del = asyncErrorHandler(async (req) => {
   const { id } = req.query;
   if (isNull(id)) throw new Error("Invalid Id", 400);
 
-  const data = await models.Accounts.findOneAndUpdate({ _id: id, status: 0 }, { status: 1 });
+  const data = await models.Accounts.findOneAndUpdate(
+    { _id: id, user: req.id, status: 0 },
+    { status: 1 }
+  );
 
   if (!data) throw new Error("No data found", 400);
   return new Response("Account deleted successfully", null, 200);
+});
+
+export const options = asyncErrorHandler(async (req) => {
+  const condition = { status: 0, user: req.id };
+
+  const data = await models.Accounts.find(condition, OPTIONS_FIELD).sort({ name: 1 }).lean();
+
+  return new Response("Success", { count: data.length, data }, 200);
 });

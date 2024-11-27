@@ -2,7 +2,7 @@ export const PORT = process.env.PORT || 4000;
 export const DATABASE_URL = process.env.DATABASE_URL;
 
 export const CLIENT_URL = process.env.CLIENT_URL;
-export const ORIGINS = ["http://localhost:3000"];
+export const ORIGINS = process.env.ORIGINS?.split(",");
 
 export const ACCESS_TOKEN = {
   SECRET: process.env.ACCESS_TOKEN_SECRET,
