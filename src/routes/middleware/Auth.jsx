@@ -1,17 +1,13 @@
 import React, { Suspense } from "react";
 import { Navigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 import AuthLayout from "../../components/AuthLayout";
 
 import { setTitle } from "../../helpers/functions";
 
 const AuthMiddleware = (props) => {
-  if (!Cookies.get("refreshToken")) {
-    Cookies.remove("refreshToken");
-    Cookies.remove("accessToken");
-
-    return <Navigate to="/login" />;
+  if (!localStorage.getItem("refreshToken")) {
+    return <Navigate to="/logout" />;
   }
 
   setTitle(props.title);
