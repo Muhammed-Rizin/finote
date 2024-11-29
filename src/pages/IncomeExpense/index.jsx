@@ -122,7 +122,7 @@ const IncomeExpense = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-2">
+              <div className="col-md-2 mb-3">
                 <label>Date</label>
                 <input
                   type="date"
@@ -131,7 +131,7 @@ const IncomeExpense = () => {
                   onChange={(e) => handleValueChange(e.target)}
                 />
               </div>
-              <div className="col-md-2">
+              <div className="col-md-2 mb-3">
                 <label>Time</label>
                 <input
                   type="time"
@@ -140,7 +140,7 @@ const IncomeExpense = () => {
                   onChange={(e) => handleValueChange(e.target)}
                 />
               </div>
-              <div className="col-md-2">
+              <div className="col-md-2 mb-3">
                 <label>Amount</label>
                 <input
                   type="number"
@@ -150,7 +150,7 @@ const IncomeExpense = () => {
                   onChange={(e) => handleValueChange(e.target)}
                 />
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 mb-3">
                 <label>Account</label>
                 <Select
                   value={selectedFields?.account || ""}
@@ -159,7 +159,7 @@ const IncomeExpense = () => {
                   className="react-select"
                 />
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 mb-3">
                 <label>Category</label>
                 <Select
                   value={selectedFields?.category || ""}
@@ -169,7 +169,7 @@ const IncomeExpense = () => {
                   isMulti
                 />
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 mb-3">
                 <label>Remarks</label>
                 <textarea
                   rows={1}
@@ -179,7 +179,7 @@ const IncomeExpense = () => {
                   onChange={(e) => handleValueChange(e.target)}
                 />
               </div>
-              <div className="col-md-3 d-flex gap-2 form-button">
+              <div className="col-md-3 mb-3 d-flex gap-2 form-button">
                 <button class="btn btn-submit">Submit</button>
                 <button class="btn btn-reset" type="reset" onClick={reset}>
                   Reset

@@ -1,15 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-
-import Cookies from "js-cookie";
+import { logout } from "../../service/auth.service";
 
 const Logout = () => {
-  Cookies.remove("refreshToken");
-  Cookies.remove("accessToken");
-  localStorage.removeItem("refreshToken");
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("user");
-
+  useEffect(() => {
+    logout();
+  }, []);
   return <Navigate to="/login" />;
 };
 

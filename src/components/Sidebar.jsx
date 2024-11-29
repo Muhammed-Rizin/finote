@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation, Link } from "react-router-dom";
-
-import { ReactComponent as AngleRightIcon } from "../assets/icons/angle-right.svg";
-import { ReactComponent as AngleLeftIcon } from "../assets/icons/angle-left.svg";
 
 import { ReactComponent as DashboardIcon } from "../assets/icons/dashboard.svg";
 import { ReactComponent as CategoryIcon } from "../assets/icons/category.svg";

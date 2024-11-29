@@ -1,23 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.ac02a8ef.css",
-    "main.js": "/static/js/main.3fb9da7c.js",
+    "main.css": "/static/css/main.5ddcdf5c.css",
+    "main.js": "/static/js/main.152f6049.js",
     "static/js/453.94f6b101.chunk.js": "/static/js/453.94f6b101.chunk.js",
     "static/media/income-expense.svg": "/static/media/income-expense.67aa2f3967b33c595d3bf162e4aef09d.svg",
     "static/media/account.svg": "/static/media/account.1822bfdc6f7a5a9a2f418950c8de3644.svg",
     "static/media/category.svg": "/static/media/category.c7acb792794dce13e1a0b9a0d08b3550.svg",
     "static/media/dashboard.svg": "/static/media/dashboard.d85e171cd1153f00a2951edf40294d27.svg",
     "static/media/edit.svg": "/static/media/edit.d2a985cfd4bf2e9073053ff5dfa65d63.svg",
-    "static/media/angle-right.svg": "/static/media/angle-right.3b0e14ad780003c64155b30e34cb7a54.svg",
-    "static/media/angle-left.svg": "/static/media/angle-left.0f574de00779d4734d6bf8a86f4eee22.svg",
     "index.html": "/index.html",
     "static/media/delete.svg": "/static/media/delete.caec8ca39f7be9abd5ee3e41e08ecb51.svg",
-    "main.ac02a8ef.css.map": "/static/css/main.ac02a8ef.css.map",
-    "main.3fb9da7c.js.map": "/static/js/main.3fb9da7c.js.map",
+    "main.5ddcdf5c.css.map": "/static/css/main.5ddcdf5c.css.map",
+    "main.152f6049.js.map": "/static/js/main.152f6049.js.map",
     "453.94f6b101.chunk.js.map": "/static/js/453.94f6b101.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ac02a8ef.css",
-    "static/js/main.3fb9da7c.js"
+    "static/css/main.5ddcdf5c.css",
+    "static/js/main.152f6049.js"
   ]
 }

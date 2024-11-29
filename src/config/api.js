@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { API_URL } from "../config";
-import { refreshToken } from "../service/auth.service";
+import { logout, refreshToken } from "../service/auth.service";
 
 axios.defaults.withCredentials = true;
 
@@ -17,9 +17,7 @@ axiosApi.interceptors.response.use(
         return response;
       } catch (refreshError) {
         console.error("Token refresh failed:", refreshError);
-
-        window.location.href = "/logout";
-
+        logout();
         return Promise.reject(refreshError);
       }
     }
