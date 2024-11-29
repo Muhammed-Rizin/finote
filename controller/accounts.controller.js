@@ -7,7 +7,7 @@ export const list = asyncErrorHandler(async (req) => {
 
   const { skip, limit } = paginationValues(req.query);
 
-  const data = await models.Accounts.find(condition, "date name balance")
+  const data = await models.Accounts.find(condition, "date time name balance")
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit)
@@ -21,6 +21,7 @@ export const create = asyncErrorHandler(async (req) => {
   name = name?.trim();
 
   if (isNull(name)) throw new Error("The field 'Name' is required", 400);
+  if (isNaN(balance)) throw new Error("The field 'Balance' is required", 400);
 
   const exists = await models.Accounts.findOne({
     user: req.id,
@@ -44,6 +45,7 @@ export const update = asyncErrorHandler(async (req) => {
 
   if (isNull(id)) throw new Error("Invalid Id", 400);
   if (isNull(name)) throw new Error("The field 'Name' is required", 400);
+  if (isNaN(balance)) throw new Error("The field 'Balance' is required", 400);
 
   const exists = await models.Accounts.findOne({
     user: req.id,

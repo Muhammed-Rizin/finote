@@ -4,8 +4,9 @@ import { getDate, getMonth, getTime } from "../helper/functions.js";
 
 const schema = new Schema(
   {
-    name: String,
+    type: { type: Number, enum: [1, 2] },
     amount: { type: Number, default: 0 },
+    account: { type: Schema.Types.ObjectId, ref: COLLECTIONS.ACCOUNTS },
     category: [{ type: Schema.Types.ObjectId, ref: COLLECTIONS.CATEGORY }],
     user: { type: Schema.Types.ObjectId, ref: COLLECTIONS.USERS },
 

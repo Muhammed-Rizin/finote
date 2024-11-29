@@ -7,7 +7,7 @@ export const list = asyncErrorHandler(async (req) => {
 
   const { skip, limit } = paginationValues(req.query);
 
-  const data = await models.Category.find(condition, "date name")
+  const data = await models.Category.find(condition, "date time name")
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit)

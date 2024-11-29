@@ -9,11 +9,12 @@ export const list = asyncErrorHandler(async (req) => {
 
   const { skip, limit } = paginationValues(req.query);
 
-  const data = await models.IncomeExpense.find(condition, "date time amount remarks")
+  const data = await models.IncomeExpense.find(condition, "type date time amount remarks")
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit)
     .populate("category", "name")
+    .populate("account", "name")
     .lean();
 
   return new Response("Success", { data }, 200);
@@ -28,15 +29,19 @@ export const create = asyncErrorHandler(async (req) => {
   if (isNull(type)) {
     throw new Error("The field 'Type' is required", 400);
   }
+
   if (type !== TYPES.INCOME && type !== TYPES.EXPENSE) {
     throw new Error("The type is invalid", 400);
   }
-  if (isNull(category)) {
+
+  if (isNull(category) || !Array.isArray(category) || !category.length) {
     throw new Error("The field 'Category' is required", 400);
   }
+
   if (isNull(account)) {
     throw new Error("The field 'Account' is required", 400);
   }
+
   if (isNull(amount) || isNaN(amount) || amount <= 0) {
     throw new Error("The field 'Amount' is required", 400);
   }
