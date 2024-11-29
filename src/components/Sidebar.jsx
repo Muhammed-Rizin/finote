@@ -11,8 +11,7 @@ import { ReactComponent as IncomeExpenseIcon } from "../assets/icons/income-expe
 
 import "../styles/components/_sidebar.css";
 
-const Sidebar = ({ onToggle }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+const Sidebar = ({ isCollapsed }) => {
   const location = useLocation();
 
   const menus = [
@@ -22,32 +21,8 @@ const Sidebar = ({ onToggle }) => {
     { name: "Category", route: "/category", icon: <CategoryIcon /> },
   ];
 
-  const toggleSidebar = () => {
-    setIsCollapsed((prev) => !prev);
-    onToggle((prev) => !prev);
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setIsCollapsed(true);
-        onToggle(true);
-      } else {
-        setIsCollapsed(false);
-        onToggle(false);
-      }
-    };
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [onToggle]);
-
   return (
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
-      <button className="toggle-button" onClick={toggleSidebar}>
-        {isCollapsed ? <AngleRightIcon className="icon" /> : <AngleLeftIcon className="icon" />}
-      </button>
       <ul className="menu">
         {menus.map((menu, index) => (
           <Link to={menu.route} key={index}>

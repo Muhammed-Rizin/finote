@@ -1,12 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { toast } from "react-toastify";
+import * as _service from "../../service/category.service";
 
-import EditButton from "../../components/EditButton";
-import DeleteButton from "../../components/DeleteButton";
-
-import { dateConverter } from "../../helpers/functions";
-import { get, patch, post } from "../../config/api";
+import List from "./List";
 
 const Category = () => {
   const formRef = useRef();
@@ -20,7 +17,7 @@ const Category = () => {
 
   const handleTableData = async () => {
     try {
-      const response = await get(`category`);
+      const response = await _service.list();
       const { data } = response;
       setTableData(data);
     } catch (error) {
@@ -32,8 +29,8 @@ const Category = () => {
     try {
       e.preventDefault();
 
-      const method = masterObject.id ? patch : post;
-      const response = await method(`category`, masterObject);
+      const method = masterObject.id ? _service.update : _service.create;
+      const response = await method(masterObject);
 
       toast.success(response.message);
       reset();
@@ -89,35 +86,7 @@ const Category = () => {
             </div>
           </form>
 
-          <div className="table-responsive" id="headTable">
-            <table className="table-list">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Date</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tableData.map((row, index) => {
-                  return (
-                    <tr>
-                      <td className="text-center">{index + 1}</td>
-                      <td>{row.name}</td>
-                      <td className="date-field">{dateConverter(row.date)}</td>
-                      <td className="actions">
-                        <div>
-                          <EditButton onClick={() => handleUpdate(row)} />
-                          <DeleteButton api={`category?id=${row._id}`} onSuccess={reset} />
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <List data={tableData} onDelete={reset} onEdit={handleUpdate} />
         </div>
       </div>
     </>

@@ -50,8 +50,10 @@
 }
 
 .auth-layout.collapsed .main-content {
-  margin-left: 70px;
-  width: calc(100% - 70px);
+  /* margin-left: 70px;
+  width: calc(100% - 70px); */
+  width: 100%;
+  margin-left: 0;
 }
 
 .content {
@@ -71,13 +73,17 @@
 
 @media (max-width: 768px) {
   .auth-layout .main-content {
-    margin-left: 70px;
-    width: calc(100% - 170px);
+    /* margin-left: 70px;
+    width: calc(100% - 170px); */
+    width: 100%;
+    margin-left: 0;
   }
 
   .auth-layout.collapsed .main-content {
-    margin-left: 50px;
-    width: calc(100% - 70px);
+    /* margin-left: 50px;
+    width: calc(100% - 70px); */
+    width: 100%;
+    margin-left: 0;
   }
 
   .content {

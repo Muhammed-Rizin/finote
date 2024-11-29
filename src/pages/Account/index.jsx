@@ -2,11 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { toast } from "react-toastify";
 
-import EditButton from "../../components/EditButton";
-import DeleteButton from "../../components/DeleteButton";
-
-import { dateConverter, numberToCurrency } from "../../helpers/functions";
-import { get, patch, post } from "../../config/api";
+import List from "./List";
+import * as _service from "../../service/accounts.service";
 
 const Accounts = () => {
   const formRef = useRef();
@@ -20,7 +17,7 @@ const Accounts = () => {
 
   const handleTableData = async () => {
     try {
-      const response = await get(`accounts`);
+      const response = await _service.list();
       const { data } = response;
       setTableData(data);
     } catch (error) {
@@ -32,8 +29,8 @@ const Accounts = () => {
     try {
       e.preventDefault();
 
-      const method = masterObject.id ? patch : post;
-      const response = await method(`accounts`, masterObject);
+      const method = masterObject.id ? _service.update : _service.create;
+      const response = await method(masterObject);
 
       toast.success(response.message);
       reset();
@@ -68,7 +65,6 @@ const Accounts = () => {
               <div className="col-md-3">
                 <label>Name</label>
                 <input
-                  type="text"
                   name="name"
                   placeholder="Name"
                   onChange={handleValueChange}
@@ -78,7 +74,6 @@ const Accounts = () => {
               <div className="col-md-3">
                 <label>Balance</label>
                 <input
-                  type="number"
                   name="balance"
                   placeholder="Balance"
                   value={masterObject?.balance || ""}
@@ -93,38 +88,7 @@ const Accounts = () => {
               </div>
             </div>
           </form>
-
-          <div className="table-responsive" id="headTable">
-            <table className="table-list">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Balance</th>
-                  <th>Date</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tableData.map((row, index) => {
-                  return (
-                    <tr>
-                      <td className="text-center">{index + 1}</td>
-                      <td>{row.name}</td>
-                      <td className="text-end">{numberToCurrency(row.balance)}</td>
-                      <td className="date-field">{dateConverter(row.date)}</td>
-                      <td className="actions">
-                        <div>
-                          <EditButton onClick={() => handleUpdate(row)} />
-                          <DeleteButton api={`accounts?id=${row._id}`} onSuccess={reset} />
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <List data={tableData} onDelete={reset} onEdit={handleUpdate} />
         </div>
       </div>
     </>

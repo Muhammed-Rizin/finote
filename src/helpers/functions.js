@@ -21,7 +21,8 @@ export const numberToString = (number = 0) => number.toLocaleString("en-IN") || 
 export const numberToCurrency = (number = 0) => {
   return (
     number?.toLocaleString("en-IN", {
-      maximumFractionDigits: 0,
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 0,
       style: "currency",
       currency: "INR",
     }) || "₹0"

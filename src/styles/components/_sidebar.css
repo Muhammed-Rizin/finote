@@ -15,7 +15,9 @@
 }
 
 .sidebar.collapsed {
-  width: 70px !important;
+  /* width: 70px !important; */
+  display: none;
+  margin-left: 0;
 }
 
 .toggle-button {

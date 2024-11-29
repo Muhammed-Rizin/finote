@@ -3,24 +3,23 @@ import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Select from "react-select";
 
-import {
-  dateConverter,
-  getDate,
-  getTime,
-  numberToCurrency,
-  timeConverter,
-} from "../../helpers/functions";
-import { get, patch, post } from "../../config/api";
+import * as _service from "../../service/incomeExpense.service";
+import * as _categoryService from "../../service/category.service";
+import * as _accountsService from "../../service/accounts.service";
+
+import List from "./List";
+
+import { getDate, getTime } from "../../helpers/functions";
+import { TYPE_VALUES } from "./helper";
 
 const IncomeExpense = () => {
   const formRef = useRef();
   const date = getDate();
   const time = getTime();
 
-  const typeValues = { INCOME: 1, EXPENSE: 2 };
-  const initialState = { type: typeValues.INCOME, date, time };
+  const initialState = { type: TYPE_VALUES.INCOME, date, time };
 
-  const [tableData, setTableData] = useState([]);
+  const [data, setData] = useState([]);
 
   const [masterObject, setMasterObject] = useState({ ...initialState });
   const [selectedFields, setSelectedFields] = useState({});
@@ -29,17 +28,17 @@ const IncomeExpense = () => {
   const [accountsOptions, setAccountsOptions] = useState([]);
 
   useEffect(() => {
-    handleOptions(`category/options`, setCategoryOptions);
-    handleOptions(`accounts/options`, setAccountsOptions);
+    handleOptions(_categoryService.options, setCategoryOptions);
+    handleOptions(_accountsService.options, setAccountsOptions);
   }, []); // eslint-disable-line
 
   useEffect(() => {
     handleTableData();
   }, []); // eslint-disable-line
 
-  const handleOptions = async (url, setState) => {
+  const handleOptions = async (method, setState) => {
     try {
-      const response = await get(url);
+      const response = await method();
       setState(response.data);
     } catch (error) {
       console.error(error);
@@ -48,9 +47,9 @@ const IncomeExpense = () => {
 
   const handleTableData = async () => {
     try {
-      const response = await get(`income-expense`);
+      const response = await _service.list();
       const { data } = response;
-      setTableData(data);
+      setData(data);
     } catch (error) {
       console.error(error);
     }
@@ -62,8 +61,7 @@ const IncomeExpense = () => {
 
       if (!masterObject.amount || !masterObject.category || !masterObject.account) return;
 
-      const method = masterObject.id ? patch : post;
-      const response = await method(`income-expense`, masterObject);
+      const response = await _service.create(masterObject);
 
       toast.success(response.message);
       reset();
@@ -105,8 +103,8 @@ const IncomeExpense = () => {
                   <input
                     type="radio"
                     name="type"
-                    value={typeValues.INCOME}
-                    checked={masterObject.type === typeValues.INCOME}
+                    value={TYPE_VALUES.INCOME}
+                    checked={masterObject.type === TYPE_VALUES.INCOME}
                     onChange={(e) => handleValueChange(e.target)}
                   />
                   Income
@@ -115,8 +113,8 @@ const IncomeExpense = () => {
                   <input
                     type="radio"
                     name="type"
-                    value={typeValues.EXPENSE}
-                    checked={masterObject.type !== typeValues.INCOME}
+                    value={TYPE_VALUES.EXPENSE}
+                    checked={masterObject.type !== TYPE_VALUES.INCOME}
                     onChange={(e) => handleValueChange(e.target)}
                   />
                   Expense
@@ -159,7 +157,6 @@ const IncomeExpense = () => {
                   onChange={(selected) => handleSelectChange({ selected, name: "account" })}
                   options={accountsOptions}
                   className="react-select"
-                  isMulti
                 />
               </div>
               <div className="col-md-3">
@@ -190,38 +187,8 @@ const IncomeExpense = () => {
               </div>
             </div>
           </form>
-          <div className="table-responsive" id="headTable">
-            <table className="table-list">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Amount</th>
-                  <th>Category</th>
-                  <th>Remarks</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tableData.map((row, index) => {
-                  const category = Array.isArray(row.category)
-                    ? row.category?.map((category) => category.name).join(", ")
-                    : "";
-                  return (
-                    <tr>
-                      <td className="text-center">{index + 1}</td>
-                      <td className="date-field">{dateConverter(row.date)}</td>
 
-                      <td className="date-field">{timeConverter(row.time)}</td>
-                      <td className="text-end">{numberToCurrency(row.amount)}</td>
-                      <td>{category}</td>
-                      <td>{row.remarks}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <List data={data} />
         </div>
       </div>
     </>
