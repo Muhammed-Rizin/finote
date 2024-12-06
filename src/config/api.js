@@ -17,7 +17,9 @@ axiosApi.interceptors.response.use(
         return response;
       } catch (refreshError) {
         console.error("Token refresh failed:", refreshError);
-        logout();
+        await logout();
+        window.location = "/login"
+
         return Promise.reject(refreshError);
       }
     }

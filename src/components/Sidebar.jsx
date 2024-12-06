@@ -5,6 +5,7 @@ import { ReactComponent as DashboardIcon } from "../assets/icons/dashboard.svg";
 import { ReactComponent as CategoryIcon } from "../assets/icons/category.svg";
 import { ReactComponent as AccountIcon } from "../assets/icons/account.svg";
 import { ReactComponent as IncomeExpenseIcon } from "../assets/icons/income-expense.svg";
+import { ReactComponent as TransferIcon } from "../assets/icons/transfer.svg";
 
 import "../styles/components/_sidebar.css";
 
@@ -14,6 +15,7 @@ const Sidebar = ({ isCollapsed }) => {
   const menus = [
     { name: "Dashboard", route: "/", icon: <DashboardIcon /> },
     { name: "Income-Expense", route: "/income-expense", icon: <IncomeExpenseIcon /> },
+    { name: "Transfer", route: "/transfer", icon: <TransferIcon /> },
     { name: "Accounts", route: "/accounts", icon: <AccountIcon /> },
     { name: "Category", route: "/category", icon: <CategoryIcon /> },
   ];

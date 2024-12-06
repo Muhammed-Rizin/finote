@@ -6,14 +6,65 @@
 }
 
 .list-card {
-  background: #fff;
+  background: #e0f7fa;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 1rem;
-  width: 100%;
-  max-width: 300px;
+  padding: 0.5rem 0.8rem;
+  width: fit-content;
+  position: relative;
+  transition: width 0.3s ease;
 }
 
+.list-card .actions {
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.expense {
+  background: #ffe6e6;
+}
+
+.list-card:hover .actions {
+  display: flex;
+  justify-content: end;
+  opacity: 1;
+  transform: translateY(0);
+  gap: 5px;
+}
+
+.list-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.list-card .list-content {
+  display: flex;
+  justify-content: space-between; /* Aligns name and balance on a single line */
+  align-items: center; /* Align vertically if needed */
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.list-card .account-name {
+  flex: 1; /* Allows the name to take available space */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; /* Prevents wrapping */
+}
+
+.list-card .account-balance {
+  margin-left: 1rem;
+  color: #d32f2f; /* Red color for negative balance */
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* 
 .list-card__details {
   list-style: none;
   padding: 0;
@@ -51,4 +102,4 @@
   .list-card {
     max-width: 100%;
   }
-}
+} */

@@ -1,4 +1,4 @@
-import { del, post, put } from "../config/api";
+import { post, put } from "../config/api";
 
 export const login = async ({ username, password }) => {
   return await post("auth/login", { username, password });
@@ -10,7 +10,6 @@ export const refreshToken = async () => {
 };
 
 export const logout = async () => {
-  await del("auth/logout");
   localStorage.removeItem("refreshToken");
   localStorage.removeItem("accessToken");
   localStorage.removeItem("user");
