@@ -46,16 +46,17 @@ export const create = asyncErrorHandler(async (req) => {
     throw new Error("The field 'Amount' is required", 400);
   }
 
-  const counter = new Counter("category");
-  const uniqueId = await counter.uniqueId("CT");
+  const counter = new Counter("incomeExpense");
+  const uniqueId = await counter.uniqueId("IE");
 
   const incrementAmount = type === TYPES.INCOME ? amount : -amount;
 
   const data = await models.Accounts.findOneAndUpdate(
     { _id: account, user: req.id, status: 0 },
-    { $inc: { amount: incrementAmount } }
+    { $inc: { balance: incrementAmount } }
   );
 
+  console.log({ data, incrementAmount });
   if (!data) throw new Error("No account found", 400);
 
   await models

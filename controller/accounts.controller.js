@@ -17,7 +17,7 @@ export const list = asyncErrorHandler(async (req) => {
 });
 
 export const create = asyncErrorHandler(async (req) => {
-  let { name, balance } = req.body;
+  let { name, balance = 0 } = req.body;
   name = name?.trim();
 
   if (isNull(name)) throw new Error("The field 'Name' is required", 400);
@@ -30,8 +30,8 @@ export const create = asyncErrorHandler(async (req) => {
   });
   if (exists) throw new Error(`Account with name '${name}' already exists`, 400);
 
-  const counter = new Counter("category");
-  const uniqueId = await counter.uniqueId("CT");
+  const counter = new Counter("account");
+  const uniqueId = await counter.uniqueId("AC");
 
   await models.Accounts({ name, user: req.id, balance, uniqueId }).save();
   counter.save();
@@ -40,7 +40,7 @@ export const create = asyncErrorHandler(async (req) => {
 });
 
 export const update = asyncErrorHandler(async (req) => {
-  let { id, name, balance } = req.body;
+  let { id, name, balance = 0 } = req.body;
   name = name?.trim();
 
   if (isNull(id)) throw new Error("Invalid Id", 400);
