@@ -80,8 +80,13 @@ const IncomeExpense = () => {
     handleValueChange({ name, value });
   };
 
-  const handleValueChange = ({ name, value, checked }) => {
-    setMasterObject((prev) => ({ ...prev, [name]: value || checked }));
+  const handleValueChange = ({ name, value }) => {
+    if (name === "type") {
+      if (masterObject.type === TYPE_VALUES.INCOME) value = TYPE_VALUES.EXPENSE;
+      else value = TYPE_VALUES.INCOME;
+    }
+
+    setMasterObject((prev) => ({ ...prev, [name]: value }));
   };
 
   const reset = () => {

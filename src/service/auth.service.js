@@ -10,7 +10,9 @@ export const refreshToken = async () => {
 };
 
 export const logout = async () => {
+  console.log("Log out function")
   localStorage.removeItem("refreshToken");
   localStorage.removeItem("accessToken");
   localStorage.removeItem("user");
+  window.location.href = "/login";
 };
