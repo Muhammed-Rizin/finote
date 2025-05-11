@@ -12,4 +12,7 @@ router.put("/refreshToken", controller.refreshToken);
 
 router.delete("/logout", auth, controller.logout);
 
+router.post("/pes/login", controller.pesLogin);
+router.put("/pes/refreshToken", controller.pesRefreshToken);
+
 export default router;

@@ -7,7 +7,7 @@ export const ORIGINS = process.env.ORIGINS?.split(",");
 export const ACCESS_TOKEN = {
   SECRET: process.env.ACCESS_TOKEN_SECRET,
   EXPIRATION: process.env.ACCESS_TOKEN_EXPIRATION,
-  MAX_AGE: 0.5 * 60 * 1000,
+  MAX_AGE: 0.5 * 60 * 60 * 1000,
 };
 
 export const REFRESH_TOKEN = {

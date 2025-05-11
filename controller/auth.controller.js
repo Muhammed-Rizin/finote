@@ -92,3 +92,57 @@ export const logout = asyncErrorHandler(async (req, res) => {
   res.clearCookie("refreshToken");
   return new Response("Success", null, 200);
 });
+
+export const pesLogin = asyncErrorHandler(async (req, res) => {
+  const { username, password } = req.body;
+
+  const condition = { status: 0, $or: [{ mobile: username }, { email: username }, { username }] };
+
+  const user = await models.PesUser.findOne(condition, "name image password");
+  if (!user) throw new Error("No account found", 400);
+
+  const passValid = user.validatePassword(password, user.password);
+  if (!passValid) throw new Error("Password is incorrect", 401);
+
+  const { accessToken, refreshToken } = await generateTokens(user?._id);
+
+  res.cookie("accessToken", accessToken, {
+    maxAge: ACCESS_TOKEN.MAX_AGE,
+    secure: true,
+    sameSite: "none",
+  });
+
+  res.cookie("refreshToken", refreshToken, {
+    maxAge: REFRESH_TOKEN.MAX_AGE,
+    secure: true,
+    sameSite: "none",
+  });
+
+  delete user.password;
+  return new Response(null, { accessToken, refreshToken, user }, 200);
+});
+
+export const pesRefreshToken = asyncErrorHandler(async (req, res) => {
+  try {
+    const token = await verifyRefreshToken(req.cookies?.refreshToken);
+
+    const user = await models.PesUser.findById(token.id).select("status username");
+    if (!user) throw new Error("Invalid refresh token", 400);
+
+    if (user.status !== 0) throw new Error("User blocked", 400);
+
+    const accessToken = generateAccessToken(user._id);
+
+    res.cookie("accessToken", accessToken, {
+      maxAge: ACCESS_TOKEN.MAX_AGE,
+      secure: true,
+      sameSite: "none",
+    });
+
+    return new Response(null, { accessToken }, 200);
+  } catch (error) {
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
+    throw new Error(error.message, 400);
+  }
+});

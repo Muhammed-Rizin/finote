@@ -4,4 +4,10 @@ export const COLLECTIONS = {
   CATEGORY: "category",
   ACCOUNTS: "accounts",
   INCOME_EXPENSE: "incomeExpense",
+
+  PES: {
+    USERS: "pesUsers",
+    MATCHES: "pesMatches",
+    TEAMS: "pesTeams",
+  },
 };
