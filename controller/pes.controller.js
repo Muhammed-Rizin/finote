@@ -58,6 +58,9 @@ export const createMatch = asyncErrorHandler(async (req) => {
 
   if (isNull(date)) throw new Error("The field 'Date' is required", 400);
 
+  playerOneScore = Number(playerOneScore);
+  playerTwoScore = Number(playerTwoScore);
+
   const count = await models.PesMatch.countDocuments({ status: 0 });
 
   let winner;
