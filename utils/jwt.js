@@ -8,10 +8,8 @@ export const generateTokens = async (id) => {
     const accessToken = generateAccessToken(id);
     let refreshToken = generateRefreshToken(id);
 
-    const userToken = await models.UserToken.findOne({ userId: id });
-
-    if (userToken) refreshToken = userToken.token;
-    else await models.UserToken({ userId: id, token: refreshToken }).save();
+    await models.UserToken.deleteMany({ userId: id });
+    await models.UserToken({ userId: id, token: refreshToken }).save();
 
     return { accessToken, refreshToken };
   } catch (error) {

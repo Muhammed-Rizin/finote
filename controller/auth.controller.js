@@ -131,10 +131,16 @@ export const pesRefreshToken = asyncErrorHandler(async (req, res) => {
 
     if (user.status !== 0) throw new Error("User blocked", 400);
 
-    const accessToken = generateAccessToken(user._id);
+    const { accessToken, refreshToken } = await generateTokens(user?._id);
 
     res.cookie("accessToken", accessToken, {
       maxAge: ACCESS_TOKEN.MAX_AGE,
+      secure: true,
+      sameSite: "none",
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      maxAge: REFRESH_TOKEN.MAX_AGE,
       secure: true,
       sameSite: "none",
     });
